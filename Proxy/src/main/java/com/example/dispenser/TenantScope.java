@@ -3,6 +3,7 @@ package com.example.dispenser;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.config.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.util.Collections;
@@ -21,12 +22,14 @@ public class TenantScope implements Scope {
         if(!scopedObjects.containsKey(name)) {
             scopedObjects.put(name, objectFactory.getObject());
         }
+        //System.out.println(scopedObjects);
         return scopedObjects.get(name);
     }
 
     @Override
-    public Object remove(String s) {
-        return null;
+    public Object remove(String name) {
+        //System.out.println(scopedObjects);
+        return scopedObjects.remove(name);
     }
 
     @Override
